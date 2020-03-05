@@ -1,6 +1,5 @@
 #imports
-from time import time
-from time import sleep
+from time import time,sleep
 
 class DM:
     def __init__(self):
