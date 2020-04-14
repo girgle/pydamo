@@ -1,6 +1,7 @@
 '''
 尝试用python对大漠插件进行初步的封装
 基本的按键和鼠标功能已经能够满足
+更多功能函数请查阅《大漠接口说明》
 
 后台键鼠模拟以及部分高级功能需要付费，注册后才能使用，我的注册码应该能用很久~
 '''
@@ -9,6 +10,11 @@ from damo import DM,Mouse,Key,VK
 #初始化
 dm = DM()
 #dm.reg()    #注册
+
+## 绑定窗口，实现后台键鼠操作。可同时创建多个dm对象
+#dm.BindWindow(hwnd,display,mouse,keypad,mode)
+#dm.UnBindWindow()
+
 
 #基本的鼠标操作
 ms = Mouse()    #生成一个新的大漠鼠标对象
