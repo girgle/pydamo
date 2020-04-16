@@ -18,11 +18,6 @@ dm.Beep(2000,550)
 #dm.UnBindWindow()
 
 
-## 绑定窗口，实现后台键鼠操作。可同时创建多个dm对象
-#dm.BindWindow(hwnd,display,mouse,keypad,mode)
-#dm.UnBindWindow()
-
-
 #基本的鼠标操作
 ms = Mouse()    #生成一个新的大漠鼠标对象
 ms = Mouse(dm)  #继承旧的大漠鼠标对象，用于后台鼠标，建议使用这种

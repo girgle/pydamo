@@ -5,10 +5,9 @@
 按键状态判断
 '''
 
-from damo import DM,Mouse,Key,vk
+from damo import vk
 from my_time import Time
 #初始化
-dm = DM()
 tt = Time() # 该模块支持64位python
 
 if(1):
