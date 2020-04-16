@@ -10,6 +10,13 @@ from damo import DM,Mouse,Key,VK
 #初始化
 dm = DM()
 #dm.reg()    #注册
+dm.Beep(2000,550)
+
+
+## 绑定窗口，实现后台键鼠操作。可同时创建多个dm对象
+#dm.BindWindow(hwnd,display,mouse,keypad,mode)
+#dm.UnBindWindow()
+
 
 ## 绑定窗口，实现后台键鼠操作。可同时创建多个dm对象
 #dm.BindWindow(hwnd,display,mouse,keypad,mode)

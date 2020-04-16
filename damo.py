@@ -1,5 +1,6 @@
 #imports
-from time import time,sleep
+from time import time
+from time import sleep
 
 class DM:
     def __init__(self):
@@ -438,18 +439,23 @@ class DM:
         return break0
     1
 
-class Time:
-
+class Time():
     def __init__(self):
 
         self.t0 = time()
         self.t1 = time()
+        self.time = time
+        self.sleep = sleep
         self.now()
+        self.break_flag = 0       #break_flag
 
-    def now(self):
+    def now(self,round_ = 3):
 
         self.t1 = time()
-        return self.t1 - self.t0
+        now = self.t1 - self.t0
+        #now = 3.1415926
+        now_r = round(now, round_)
+        return now_r
 
     def exceed(self, T):
         if (self.now() >= T):
@@ -457,31 +463,242 @@ class Time:
         else:
             return 0
 
+
+    def during(self,T):
+        if (self.now() <= T):
+            return 1
+        else:
+            return 0
+
+    # 检查是否按下了暂停按键p
+    def stop(self,ch='p'):
+        ch = ch.upper()
+
+        from win32api import GetKeyState
+        nVirtKey = GetKeyState(ord(ch))
+
+        if (nVirtKey == -127 or nVirtKey == -128):      #按下
+            self.break_flag = 1
+            return 1
+        else:
+            self.break_flag = 0
+            return 0
+
+    def stop_0(self,ch='p', continue_key='p'):
+        # ch = 'a'
+        break0 = 0
+        ch = ch.upper()
+
+        from win32api import GetKeyState
+        nVirtKey = GetKeyState(ord(ch))
+
+        if (nVirtKey == -127 or nVirtKey == -128):
+            print('------- Stop! --------')
+            from win32gui import MessageBox
+            # 'A'.upper()
+            break0 = not (MessageBox(0, 'Do you break?', 'Stop!', 1) - 1)   #询问是否退出
+            if (break0):
+                print('------ Break!!! --------')
+                self.break_flag = 1
+                return break0
+        self.break_flag = 0
+        return break0
+
+    def get_key_state(self,ch='p'):
+        ch = ch.upper()
+
+        from win32api import GetKeyState
+        nVirtKey = GetKeyState(ord(ch))
+
+        if (nVirtKey == -127 or nVirtKey == -128):
+            return 1
+        else:
+            return 0
+
+    def sleep_check_stop(self, t, type = 1, ch = 'p'):
+        self.sleep(t)
+
+        if(type):
+            self.stop(ch)
+        else:
+            self.stop_0(ch)
+
+        pass
+
+
     1
 
-class VK:
-        Time = 0.1
-        Constant = 800
+class vk:
+    Time = 0.1
+    Constant = 8000 #内部标记
 
-        ctrl = 17
-        alt = 18
-        shift = 16
+    backspace = 8
+    tab = 9
+    clear = 12
+    enter = 13
+    shift = 16
+    ctrl = 17
+    alt = 18
+    pause = 19
+    caps_lock = 20
+    esc = 27
+    spacebar = 32
+    page_up = 33
+    page_down = 34
+    end = 35
+    home = 36
+    left_arrow = 37
+    up_arrow = 38
+    right_arrow = 39
+    down_arrow = 40
+    select = 41
+    print = 42
+    execute = 43
+    print_screen = 44
+    insert = 45
+    delete = 46
+    help = 47
+    num_0 = 48
+    num_1 = 49
+    num_2 = 50
+    num_3 = 51
+    num_4 = 52
+    num_5 = 53
+    num_6 = 54
+    num_7 = 55
+    num_8 = 56
+    num_9 = 57
+    a = 65
+    b = 66
+    c = 67
+    d = 68
+    e = 69
+    f = 70
+    g = 71
+    h = 72
+    i = 73
+    j = 74
+    k = 75
+    l = 76
+    m = 77
+    n = 78
+    o = 79
+    p = 80
+    q = 81
+    r = 82
+    s = 83
+    t = 84
+    u = 85
+    v = 86
+    w = 87
+    x = 88
+    y = 89
+    z = 90
+    numpad_0 = 96
+    numpad_1 = 97
+    numpad_2 = 98
+    numpad_3 = 99
+    numpad_4 = 100
+    numpad_5 = 101
+    numpad_6 = 102
+    numpad_7 = 103
+    numpad_8 = 104
+    numpad_9 = 105
+    multiply_key = 106
+    add_key = 107
+    separator_key = 108
+    subtract_key = 109
+    decimal_key = 110
+    divide_key = 111
+    F1 = 112
+    F2 = 113
+    F3 = 114
+    F4 = 115
+    F5 = 116
+    F6 = 117
+    F7 = 118
+    F8 = 119
+    F9 = 120
+    F10 = 121
+    F11 = 122
+    F12 = 123
+    F13 = 124
+    F14 = 125
+    F15 = 126
+    F16 = 127
+    F17 = 128
+    F18 = 129
+    F19 = 130
+    F20 = 131
+    F21 = 132
+    F22 = 133
+    F23 = 134
+    F24 = 135
+    num_lock = 144
+    scroll_lock = 145
+    left_shift = 160
+    right_shift = 161
+    left_control = 162
+    right_control = 163
+    left_menu = 164
+    right_menu = 165
+    browser_back = 166
+    browser_forward = 167
+    browser_refresh = 168
+    browser_stop = 169
+    browser_search = 170
+    browser_favorites = 171
+    browser_start_and_home = 172
+    volume_mute = 173
+    volume_Down = 174
+    volume_up = 175
+    next_track = 176
+    previous_track = 177
+    stop_media = 178
+    play = 179
+    pause_media = 179
+    start_mail = 180
+    select_media = 181
+    start_application_1 = 182
+    start_application_2 = 183
+    attn_key = 246
+    crsel_key = 247
+    exsel_key = 248
+    play_key = 250
+    zoom_key = 251
+    clear_key = 254
 
-        f1 = 112
-        f2 = 113
-        f3 = 114
-        f4 = 116
-        f5 = 117
+    symbol = {'+': 0xBB,
+               ',': 0xBC,
+               '-': 0xBD,
+               '.': 0xBE,
+               '/': 0xBF,
+               '`': 0xC0,
+               ';': 0xBA,
+               '[': 0xDB,
+               '\\': 0xDC,
+               ']': 0xDD,
+               "'": 0xDE,
+               '\`': 0xC0}
+    ##########
+    ctrl = 17
+    alt = 18
+    shift = 16
 
-        enter = 13
-        space = 32
-        back = 8
+    f1 = 112
+    f2 = 113
+    f3 = 114
+    f4 = 116
+    f5 = 117
 
+    enter = 13
+    space = 32
+    back = 8
 
-        #小键盘数字
-        n0, n1, n2, n3, n4, n5, n6, n7, n8, n9 = 96, 97, 98, 99, 100, 101, 102, 103, 104, 105
+    # 小键盘数字
+    n0, n1, n2, n3, n4, n5, n6, n7, n8, n9 = 96, 97, 98, 99, 100, 101, 102, 103, 104, 105
 
-        left, up, right, down = 37, 38, 39, 40
+    left, up, right, down = 37, 38, 39, 40
 
 class Key:
     def __init__(self,dm = 0, key='k'):
@@ -490,7 +707,7 @@ class Key:
         else:
             self.dm = dm
 
-        
+
         if (key.__class__.__name__ == 'str'):
             self.chr = key.upper()
         else:
@@ -521,41 +738,41 @@ class Key:
 
     def conv(self, key0):
         key = key0
-        if (key == VK.Constant):
+        if (key == vk.Constant):
             key = self.ord
         else:
             key = self.conv_ord(key)
         return key
 
-    def state(self, key=VK.Constant):
+    def state(self, key=vk.Constant):
         key = self.conv(key)
         return self.dm.GetKeyState(key)
 
-    def press(self, key0=VK.Constant):
+    def press(self, key0=vk.Constant):
         key = self.conv_ord(key0)
 
         return self.dm.KeyPress(key)
 
-    def down(self, key0=VK.Constant):
+    def down(self, key0=vk.Constant):
         key = self.conv_ord(key0)
 
         return self.dm.KeyDown(key)
 
-    def up(self, key0=VK.Constant):
+    def up(self, key0=vk.Constant):
         key = self.conv_ord(key0)
 
         return self.dm.KeyUp(key)
 
-    def down_up(self, key0=VK.Constant, t=VK.Time):
+    def down_up(self, key0=vk.Constant, t=vk.Time):
         key = self.conv_ord(key0)
         self.down(key)
         sleep(t)
         self.up(key)
 
-    def dp(self, key=VK.Constant, t=VK.Time):
+    def dp(self, key=vk.Constant, t=vk.Time):
         self.down_up(key, t)
 
-    def test_dp(self, key, delay=1, t=VK.Time):
+    def test_dp(self, key, delay=1, t=vk.Time):
         sleep(delay)
         self.dp(key, t)
 
@@ -594,79 +811,185 @@ class Mouse:
     def test_click_right(self,x, y, t=0.5, delay=1):
         sleep(delay)
         return self.click_right(x, y, t)
-    #大漠对象的直接转换
-    if(1):
-        def LeftClick(self, ):
-            return self.dm.LeftClick()
 
-        def LeftDoubleClick(self, ):
-            return self.dm.LeftDoubleClick()
+    def LeftClick(self):
+        x,y = self.position()
+        self.click_left(x, y)
 
-        def MiddleClick(self, ):
-            return self.dm.MiddleClick()
-
-        def LeftDown(self, ):
-            return self.dm.LeftDown()
-
-        def LeftUp(self, ):
-            return self.dm.LeftUp()
-
-        def RightClick(self, ):
-            return self.dm.RightClick()
-
-        def SetMouseDelay(self, type, delay):
-            return self.dm.SetMouseDelay(type, delay)
-
-        def MoveR(self, rx, ry):
-            return self.dm.MoveR(rx, ry)
-
-        def RightDown(self, ):
-            return self.dm.RightDown()
-
-        def RightUp(self, ):
-            return self.dm.RightUp()
-
-        def WheelDown(self, ):
-            return self.dm.WheelDown()
-
-        def WheelUp(self, ):
-            return self.dm.WheelUp()
-
-        def GetCursorShape(self, ):
-            return self.dm.GetCursorShape()
-
-        def GetCursorShapeEx(self, int_type):
-            return self.dm.GetCursorShapeEx(int_type)
     1
 
+if(0):
+    # 初始化
+    dm = DM()
 
-#增加大漠函数时可以简化操作
+    ms = Mouse(dm)
+    ms = Mouse()
+    ms.position()
+    x, y = (0, 0)
+    ms.move_to(x, y)
+    sleep(1)
+    ms.click_left(x, y, 2)
+    sleep(1)
+    ms.click_right(x, y, 1)
 
-# #将公有函数转换为dm对象里面的私有函数
-# def f0_to_f1(f0):
-#     f0_name, f0_para = f0.split(')')[0].split('(')
-#     f0_name, f0_para
-#     str = 'def {0}(self,{1}):\n\treturn self.dm.{2}'.format(f0_name, f0_para, f0)
-#     print(str)
+    # 键盘操作
+    kk = Key(dm)
+    kk.test_dp('a', 1)  # 测试用，1秒后按下a键
+    kk.dp('a')  # 按下a键
+
+
+# debug
+# code = {'backspace': 0x08,
+#                'tab': 0x09,
+#                'clear': 0x0C,
+#                'enter': 0x0D,
+#                'shift': 0x10,
+#                'ctrl': 0x11,
+#                'alt': 0x12,
+#                'pause': 0x13,
+#                'caps_lock': 0x14,
+#                'esc': 0x1B,
+#                'spacebar': 0x20,
+#                'page_up': 0x21,
+#                'page_down': 0x22,
+#                'end': 0x23,
+#                'home': 0x24,
+#                'left_arrow': 0x25,
+#                'up_arrow': 0x26,
+#                'right_arrow': 0x27,
+#                'down_arrow': 0x28,
+#                'select': 0x29,
+#                'print': 0x2A,
+#                'execute': 0x2B,
+#                'print_screen': 0x2C,
+#                'insert': 0x2D,
+#                'delete': 0x2E,
+#                'help': 0x2F,
+#                'num_0': 0x30,
+#                'num_1': 0x31,
+#                'num_2': 0x32,
+#                'num_3': 0x33,
+#                'num_4': 0x34,
+#                'num_5': 0x35,
+#                'num_6': 0x36,
+#                'num_7': 0x37,
+#                'num_8': 0x38,
+#                'num_9': 0x39,
+#                'a': 0x41,
+#                'b': 0x42,
+#                'c': 0x43,
+#                'd': 0x44,
+#                'e': 0x45,
+#                'f': 0x46,
+#                'g': 0x47,
+#                'h': 0x48,
+#                'i': 0x49,
+#                'j': 0x4A,
+#                'k': 0x4B,
+#                'l': 0x4C,
+#                'm': 0x4D,
+#                'n': 0x4E,
+#                'o': 0x4F,
+#                'p': 0x50,
+#                'q': 0x51,
+#                'r': 0x52,
+#                's': 0x53,
+#                't': 0x54,
+#                'u': 0x55,
+#                'v': 0x56,
+#                'w': 0x57,
+#                'x': 0x58,
+#                'y': 0x59,
+#                'z': 0x5A,
+#                'numpad_0': 0x60,
+#                'numpad_1': 0x61,
+#                'numpad_2': 0x62,
+#                'numpad_3': 0x63,
+#                'numpad_4': 0x64,
+#                'numpad_5': 0x65,
+#                'numpad_6': 0x66,
+#                'numpad_7': 0x67,
+#                'numpad_8': 0x68,
+#                'numpad_9': 0x69,
+#                'multiply_key': 0x6A,
+#                'add_key': 0x6B,
+#                'separator_key': 0x6C,
+#                'subtract_key': 0x6D,
+#                'decimal_key': 0x6E,
+#                'divide_key': 0x6F,
+#                'F1': 0x70,
+#                'F2': 0x71,
+#                'F3': 0x72,
+#                'F4': 0x73,
+#                'F5': 0x74,
+#                'F6': 0x75,
+#                'F7': 0x76,
+#                'F8': 0x77,
+#                'F9': 0x78,
+#                'F10': 0x79,
+#                'F11': 0x7A,
+#                'F12': 0x7B,
+#                'F13': 0x7C,
+#                'F14': 0x7D,
+#                'F15': 0x7E,
+#                'F16': 0x7F,
+#                'F17': 0x80,
+#                'F18': 0x81,
+#                'F19': 0x82,
+#                'F20': 0x83,
+#                'F21': 0x84,
+#                'F22': 0x85,
+#                'F23': 0x86,
+#                'F24': 0x87,
+#                'num_lock': 0x90,
+#                'scroll_lock': 0x91,
+#                'left_shift': 0xA0,
+#                'right_shift ': 0xA1,
+#                'left_control': 0xA2,
+#                'right_control': 0xA3,
+#                'left_menu': 0xA4,
+#                'right_menu': 0xA5,
+#                'browser_back': 0xA6,
+#                'browser_forward': 0xA7,
+#                'browser_refresh': 0xA8,
+#                'browser_stop': 0xA9,
+#                'browser_search': 0xAA,
+#                'browser_favorites': 0xAB,
+#                'browser_start_and_home': 0xAC,
+#                'volume_mute': 0xAD,
+#                'volume_Down': 0xAE,
+#                'volume_up': 0xAF,
+#                'next_track': 0xB0,
+#                'previous_track': 0xB1,
+#                'stop_media': 0xB2,
+#                'play': 0xB3,
+#                 'pause_media': 0xB3,
+#                'start_mail': 0xB4,
+#                'select_media': 0xB5,
+#                'start_application_1': 0xB6,
+#                'start_application_2': 0xB7,
+#                'attn_key': 0xF6,
+#                'crsel_key': 0xF7,
+#                'exsel_key': 0xF8,
+#                'play_key': 0xFA,
+#                'zoom_key': 0xFB,
+#                'clear_key': 0xFE,
+#                'symbol_+': 0xBB,
+#                'symbol_,': 0xBC,
+#                'symbol_-': 0xBD,
+#                'symbol_.': 0xBE,
+#                'symbol_/': 0xBF,
+#                'symbol_`': 0xC0,
+#                'symbol_;': 0xBA,
+#                'symbol_[': 0xDB,
+#                'symbol_\\': 0xDC,
+#                'symbol_]': 0xDD,
+#                "symbol_'": 0xDE,
+#                'symbol_\`': 0xC0}
+# code.keys()
+# code.values()
 #
-#
-# ff = '''LeftClick()
-# LeftDoubleClick()
-# MiddleClick()
-# LeftDown()
-# LeftUp()
-# RightClick()
-# SetMouseDelay(type,delay)
-# MoveR(rx,ry)
-# RightDown()
-# RightUp()
-# WheelDown()
-# WheelUp()
-# GetCursorShape()
-# GetCursorShapeEx(int_type)'''
-#
-# #多个一起转换,最好ff向左缩进至顶格再转换！
-# def ff0_to_ff1(ff):
-#     ff_0 = ff.split('\n')
-#     for f0 in ff_0: f0_to_f1(f0)
-# ff0_to_ff1(ff)
+# for k,v in code.items():
+#     #print(k,v)
+#     string = ' {} = {}'.format(k,v)
+#     print(string)
