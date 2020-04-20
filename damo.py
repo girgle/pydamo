@@ -699,6 +699,7 @@ class vk:
     n0, n1, n2, n3, n4, n5, n6, n7, n8, n9 = 96, 97, 98, 99, 100, 101, 102, 103, 104, 105
 
     left, up, right, down = 37, 38, 39, 40
+VK = vk
 
 class Key:
     def __init__(self,dm = 0, key='k'):
