@@ -27,7 +27,6 @@ ms.position()   #当前鼠标位置
 x, y = (0, 0)
 ms.move_to(x, y)    #移动鼠标
 ms.LeftClick()  #单击
-ms.LeftDoubleClick()    #双击
 
 # 组合功能
 sleep(1)
